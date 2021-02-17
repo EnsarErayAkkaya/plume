@@ -1,0 +1,29 @@
+Choose Role
+    Login
+        Register
+        Forgot Password Request
+            Forgot Password Reset
+
+Teacher
+    My Students
+        Student Profile 
+    My Subjects
+        Subject Detail 
+            Assignment Detail
+                Assignment Answer Detail
+            Create New Assignment
+        Create New Subject
+    My Profile
+    Search Student
+
+Student
+    My Teachers
+        Subjects I attend
+            Subject Details for Student
+                Assignment Detail
+                    Assignment Answer Detail
+                    Create New Assignment Answer
+                    Edit existing Assignment Answer
+    My Profile
+    Active Assignments
+
