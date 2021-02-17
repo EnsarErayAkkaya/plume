@@ -65,7 +65,7 @@ class StudentCardTemplate extends StatelessWidget {
                             fontSize: 18
                         ),
                       ),
-                      onPressed: press,
+                      onPressed:() => press(student.id),
                     ),
                     const SizedBox(width: 8),
                   ],

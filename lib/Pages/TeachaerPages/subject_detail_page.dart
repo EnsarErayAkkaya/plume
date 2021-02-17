@@ -27,6 +27,30 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
 
   IconData actionButtonIcon = Icons.person_add;
   Color actionButtonColor = Colors.blue;
+
+  void toggleAddStudent (){
+    addStudent = !addStudent;
+
+    if(addStudent == true){
+      setState(() {
+        actionButtonIcon = Icons.cancel;
+        actionButtonColor = Colors.red;
+        bodyWidget = AddStudentWidget(
+          subjectStudents: widget.subject.students,
+          subjectId: widget.subject.id,
+          afterAddStudent: toggleAddStudent,
+        );
+      });
+    }
+    else{
+      setState(() {
+        actionButtonIcon = Icons.person_add;
+        actionButtonColor = Colors.blue;
+        bodyWidget = SubjectDetail(subject: widget.subject,);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     CarouselController buttonCarouselController = CarouselController();
@@ -44,27 +68,7 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
       floatingActionButton: FloatingButtonTemplate(
         icon: actionButtonIcon,
         color: actionButtonColor,
-        press: (){
-          addStudent = !addStudent;
-
-          if(addStudent == true){
-            setState(() {
-              actionButtonIcon = Icons.cancel;
-              actionButtonColor = Colors.red;
-              bodyWidget = AddStudentWidget(
-                subjectStudents: widget.subject.students,
-                subjectId: widget.subject.id,
-              );
-            });
-          }
-          else{
-            setState(() {
-              actionButtonIcon = Icons.person_add;
-              actionButtonColor = Colors.blue;
-              bodyWidget = SubjectDetail(subject: widget.subject,);
-            });
-          }
-        },
+        press: toggleAddStudent,
       ),
     );
   }

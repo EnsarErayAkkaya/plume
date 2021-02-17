@@ -6,7 +6,8 @@ import 'package:plume/Widgets/StudentWidgets/student_id_list_view.dart';
 class AddStudentWidget extends StatelessWidget {
   final List<String> subjectStudents;
   final String subjectId;
-  const AddStudentWidget({Key key, this.subjectStudents, this.subjectId}) : super(key: key);
+  final Function afterAddStudent;
+  const AddStudentWidget({Key key, this.subjectStudents, this.subjectId, this.afterAddStudent}) : super(key: key);
 
   List<String> getNonExistingStudents(){
     List<String> ids = List<String>();
@@ -52,9 +53,11 @@ class AddStudentWidget extends StatelessWidget {
                   TeacherData.teacher.subjects.firstWhere(
                           (e) => e.id == subjectId
                   ).students.add(studentId);
+                  afterAddStudent();
                 }
                 else{
-
+                  print(studentResponse['error']);
+                  afterAddStudent();
                 }
               },
               'Add Student',
