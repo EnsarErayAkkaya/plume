@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/subject.dart';
 import 'package:plume/Services/add_student.dart';
+import 'package:plume/Services/remove_student.dart';
 import 'package:plume/Widgets/StudentWidgets/add_student_widget.dart';
+import 'package:plume/Widgets/StudentWidgets/student_card_template.dart';
 import 'package:plume/Widgets/StudentWidgets/student_list_view.dart';
 import 'package:plume/Widgets/Utility/floating_button_template.dart';
 import 'package:plume/Widgets/assignment_carousel_template.dart';
@@ -46,7 +48,7 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
       setState(() {
         actionButtonIcon = Icons.person_add;
         actionButtonColor = Colors.blue;
-        bodyWidget = SubjectDetail(subject: widget.subject,);
+        bodyWidget = SubjectDetailBody(subject: widget.subject,);
       });
     }
   }
@@ -64,7 +66,7 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
           ),
         ),
       ),
-      body: bodyWidget == null ? SubjectDetail( subject: widget.subject) : bodyWidget,
+      body: bodyWidget == null ? SubjectDetailBody( subject: widget.subject) : bodyWidget,
       floatingActionButton: FloatingButtonTemplate(
         icon: actionButtonIcon,
         color: actionButtonColor,
@@ -73,99 +75,124 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
     );
   }
 }
-
-class SubjectDetail extends StatelessWidget {
-  const SubjectDetail({
+class SubjectDetailBody extends StatefulWidget {
+  const SubjectDetailBody({
     Key key, this.subject,
   }) : super(key: key);
 
   final Subject subject;
 
   @override
+  _SubjectDetailBodyState createState() => _SubjectDetailBodyState();
+}
+
+class _SubjectDetailBodyState extends State<SubjectDetailBody> {
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.fromLTRB(0,size.height * .01,0,0),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(size.width * 0.05, 0, size.width * 0.05, 10),
-            child:Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Assignments',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                  ) ,
-                ),
-                Text(
-                  'Count: ' + subject.assignments.length.toString(),
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                  ) ,
-                ),
-                TextButton.icon(
-                  icon: Icon(
-                    Icons.add_box,
-                    color: Theme.of(context).accentColor,
-                    size: 28,
-                  ),
-                  label: const Text(
-                    'Add',
-                    style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20
-                    ),
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            )
-          ),
-          //Assignments Carousel
-          AssignmentCarouselTemplate(assignments:subject.assignments),
-          SizedBox(height: size.height * 0.015,),
-          Padding(
-            padding: EdgeInsets.all(6),
-            child:Divider(thickness: 3, color:Theme.of(context).primaryColor),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(size.width * 0.1, 0, size.width * 0.1, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Students',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                  ) ,
-                ),
-                Text(
-                  'Count: ' + subject.students.length.toString(),
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                  ) ,
-                ),
-              ],
-            )
-          ),
-          //students
-          Expanded(
-              child: StudentIDListView(
-                subject.students,
-                (){},
-                'Remove Student',
-                Icons.person_remove,
+        margin: EdgeInsets.fromLTRB(0,size.height * .01,0,0),
+        child: ListView(
+            padding: const EdgeInsets.all(8),
+            children: [
+              Padding(
+                  padding: EdgeInsets.fromLTRB(size.width * 0.05, 0, size.width * 0.05, 10),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Assignments',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold
+                        ) ,
+                      ),
+                      Text(
+                        'Count: ' + widget.subject.assignments.length.toString(),
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold
+                        ) ,
+                      ),
+                      TextButton.icon(
+                        icon: Icon(
+                          Icons.add_box,
+                          color: Theme.of(context).accentColor,
+                          size: 28,
+                        ),
+                        label: const Text(
+                          'Add',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20
+                          ),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ],
+                  )
               ),
-          )
-        ],
-      ),
+              AssignmentCarouselTemplate(assignments: widget.subject.assignments),
+              SizedBox(height: size.height * 0.015,),
+              Padding(
+                padding: EdgeInsets.all(6),
+                child:Divider(thickness: 3, color:Theme.of(context).primaryColor),
+              ),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(size.width * 0.1, 0, size.width * 0.1, 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Students',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold
+                        ) ,
+                      ),
+                      Text(
+                        'Count: ' + widget.subject.students.length.toString(),
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold
+                        ) ,
+                      ),
+                    ],
+                  )
+              ),
+              Column(
+                children: widget.subject.students.map(
+                  (e) => TeacherData.teacher.students.firstWhere((element) => element.id == e)).toList().map(
+                    (e) => StudentCardTemplate(
+                      student: e,
+                      press: (String studentId) async {
+                        RemoveStudent removeStudent = RemoveStudent(
+                          TeacherData.teacher.id,
+                          widget.subject.id,
+                          studentId
+                        );
+                        Map removeResponse = await removeStudent.sendAddStudentRequest();
+                        if(removeResponse['success'] == true){
+                          print('removed');
+                          //remove student
+                          setState(() {
+                            TeacherData.teacher.subjects.firstWhere(
+                                    (s) => s.id == widget.subject.id
+                            ).students.removeWhere((s) => s == studentId);
+                          });
+                        }
+                        else{
+                          print('error');
+                        }
+                    },
+                    buttonIcon: Icons.person_remove,
+                    buttonText: 'Remove Student',
+                  ),
+                ).toList(),
+              )
+            ]
+        )
     );
   }
 }

@@ -9,7 +9,7 @@ class AssignmentCarouselItemTemplate extends StatelessWidget {
   const AssignmentCarouselItemTemplate({Key key, this.assignment}) : super(key: key);
 
   String assignmentDesc(String desc) {
-    return desc.length < 70? desc:desc.substring(0,70) + '...';
+    return desc.length < 60? desc:desc.substring(0,60) + '...';
   }
 
   @override
