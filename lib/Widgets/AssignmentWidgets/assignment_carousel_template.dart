@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:plume/Models/assignment.dart';
-import 'package:plume/Widgets/assignment_carousel_item_template.dart';
+import 'file:///C:/Eray/Flutter/plume/lib/Widgets/AssignmentWidgets/assignment_carousel_item_template.dart';
 
 class AssignmentCarouselTemplate extends StatelessWidget {
   final List<Assignment> assignments;
