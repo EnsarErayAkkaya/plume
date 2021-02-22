@@ -21,69 +21,74 @@ class CardButtonsTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     //print(', CardButtonsTemplate Builded');
     return Container(
+      height: size.height*0.09,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
           color: Theme.of(context).primaryColor,
-          width: 8,
+          width: 4,
         ),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          TextButton.icon(
-            icon: Icon(
-              Icons.delete,
-              color: Colors.red,
-            ),
-            label: const Text(
-              'Delete',
-              style: TextStyle(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton.icon(
+                icon: Icon(
+                  Icons.delete,
                   color: Colors.red,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18
+                  size: 16,
+                ),
+                label: const Text(
+                  'Delete',
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16
+                  ),
+                ),
+                onPressed: () => delete(),
               ),
-            ),
-            onPressed: () => delete(),
-          ),
-          const SizedBox(width: 8),
-          TextButton.icon(
-            icon: Icon(
-              Icons.edit,
-              color: Colors.orange,
-            ),
-            label: const Text(
-              'Edit',
-              style: TextStyle(
-                  color: Colors.deepOrange,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18
+              const SizedBox(width: 2),
+              TextButton.icon(
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.orange,
+                  size: 16,
+                ),
+                label: const Text(
+                  'Edit',
+                  style: TextStyle(
+                      color: Colors.deepOrange,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16
+                  ),
+                ),
+                onPressed: edit,
               ),
-            ),
-            onPressed: edit,
-          ),
-          const SizedBox(width: 8),
-          TextButton.icon(
-            icon: Icon(
-              Icons.more,
-              color: Colors.blue,
-            ),
-            label: Text(
-              'Details',
-              style: TextStyle(
+              const SizedBox(width: 2),
+              TextButton.icon(
+                icon: Icon(
+                  Icons.more,
                   color: Colors.blue,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18
+                  size: 16,
+                ),
+                label: Text(
+                  'Details',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16
+                  ),
+                ),
+                onPressed: () => details(),
               ),
-            ),
-            onPressed: () => details(),
+              const SizedBox(width: 0),
+            ],
           ),
-          const SizedBox(width: 8),
-        ],
-      ),
     );
   }
 }

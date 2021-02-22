@@ -17,6 +17,7 @@ class AssignmentCarouselItemTemplate extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width ,
+      height: size.height,
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         border: Border.all(
@@ -30,7 +31,7 @@ class AssignmentCarouselItemTemplate extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(8,15,8,0),
+            padding: EdgeInsets.fromLTRB(8,0,0,0),
             child: Text(
               assignment.title,
               textAlign: TextAlign.center,
@@ -42,7 +43,7 @@ class AssignmentCarouselItemTemplate extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(8,15,8,0),
+            padding: EdgeInsets.fromLTRB(8,0,0,0),
             child: Text(
               assignmentDesc(assignment.description),
               textAlign: TextAlign.center,

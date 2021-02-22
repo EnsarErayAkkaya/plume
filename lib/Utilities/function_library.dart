@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class FunctionLibrary{
@@ -49,5 +53,34 @@ class FunctionLibrary{
           }, currentTime: DateTime.now());
         },
         currentTime: DateTime.now(), locale: LocaleType.en);
+  }
+  static void pickFile(BuildContext context, Function onConfirm) async{
+    FileTileSelectMode filePickerSelectMode = FileTileSelectMode.checkButton;
+    String path = await FilesystemPicker.open(
+      title: 'Open file',
+      context: context,
+      rootDirectory: Directory('storage'),//new Directory('path_to_root'),
+      fsType: FilesystemType.file,
+      folderIconColor: Colors.teal,
+      allowedExtensions: ['.txt', '.png', '.jpg', '.pdf', '.doc'],
+      fileTileSelectMode: filePickerSelectMode,
+      requestPermission: () async {
+        var storageStatus = await Permission.storage.status;
+        print(storageStatus);
+
+        if (!storageStatus.isGranted)
+          await Permission.storage.request();
+
+        if(await Permission.storage.isGranted)
+          return true;
+        else
+          return false;
+      },
+    );
+    if(path != null){
+      onConfirm(File(path));
+    }else{
+      print('file not found error');
+    }
   }
 }

@@ -46,14 +46,26 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
       setState(() {
         actionButtonIcon = Icons.person_add;
         actionButtonColor = Colors.blue;
-        bodyWidget = SubjectDetailBody(subject: widget.subject, addAssignment: (){
+        bodyWidget = setSubjectDetailBody();
+      });
+    }
+  }
+  Widget setSubjectDetailBody(){
+    return SubjectDetailBody(subject: widget.subject, addAssignment: (){
+      setState(() {
+        createAssignment = true;
+        bodyWidget = AssignmentCreateWidget(
+          subject: widget.subject,
+          back: (){
             setState(() {
-              bodyWidget = AssignmentCreateWidget(subject: widget.subject);
+              createAssignment = false;
+              bodyWidget = setSubjectDetailBody();
             });
           },
         );
       });
-    }
+    },
+    );
   }
 
   @override
@@ -61,15 +73,15 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
     CarouselController buttonCarouselController = CarouselController();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
+      appBar: !createAssignment?AppBar(
         title: Text(
           widget.subject.name,
           style: TextStyle(
             fontSize: 25
           ),
         ),
-      ),
-      body: bodyWidget == null ? SubjectDetailBody( subject: widget.subject) : bodyWidget,
+      ): null,
+      body: bodyWidget == null ? setSubjectDetailBody() : bodyWidget,
       floatingActionButton: Visibility(
         visible: !createAssignment,
         child:FloatingButtonTemplate(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart';
 
 class ServiceBase{
@@ -14,6 +15,20 @@ Future<Map> postRequest(String url, dynamic body) async {
   );
 
   return mapData(response.body);
+}
+Future<Map> putMultipartRequest(String url, String filename) async {
+  printURL(url);
+  var request = MultipartRequest('PUT', Uri.parse(url));
+
+  request.files.add(
+      MultipartFile.fromBytes(
+          'file',
+          File(filename).readAsBytesSync(),
+          filename: filename.split("/").last
+      )
+  );
+  StreamedResponse response = await request.send();
+  return mapData(await response.stream.bytesToString());
 }
 Future<Map> putRequest(String url, dynamic body) async {
   printURL(url);

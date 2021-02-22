@@ -23,25 +23,26 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
     Size size = MediaQuery.of(context).size;
     return Container(
         margin: EdgeInsets.fromLTRB(0,size.height * .01,0,0),
+        width: size.width,
         child: ListView(
             padding: const EdgeInsets.all(8),
             children: [
               Padding(
-                  padding: EdgeInsets.fromLTRB(size.width * 0.05, 0, size.width * 0.05, 10),
+                  padding: EdgeInsets.fromLTRB(size.width * 0.025, 0, size.width * 0.025, 0),
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'Assignments',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold
                         ) ,
                       ),
                       Text(
                         'Count: ' + widget.subject.assignments.length.toString(),
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold
                         ) ,
                       ),
@@ -49,14 +50,14 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
                         icon: Icon(
                           Icons.add_box,
                           color: Theme.of(context).accentColor,
-                          size: 28,
+                          size: 20,
                         ),
                         label: const Text(
                           'Add',
                           style: TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.w600,
-                              fontSize: 20
+                              fontSize: 18
                           ),
                         ),
                         onPressed: widget.addAssignment,
@@ -64,9 +65,9 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
                     ],
                   )
               ),
-              SizedBox(height: size.height * 0.015,),
+              //SizedBox(height: size.height * 0.01,),
               AssignmentCarouselTemplate(assignments: widget.subject.assignments),
-              SizedBox(height: size.height * 0.015,),
+              SizedBox(height: size.height * 0.01,),
               Padding(
                 padding: EdgeInsets.all(6),
                 child:Divider(thickness: 3, color:Theme.of(context).primaryColor),
@@ -79,14 +80,14 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
                       Text(
                         'Students',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold
                         ) ,
                       ),
                       Text(
                         'Count: ' + widget.subject.students.length.toString(),
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold
                         ) ,
                       ),

@@ -13,7 +13,7 @@ class AssignmentCarouselTemplate extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return CarouselSlider(
       options: CarouselOptions(
-        height: size.height * 0.35,
+        height: size.height * 0.4,
         autoPlay: false,
         enlargeCenterPage: true,
         viewportFraction: 0.9,
