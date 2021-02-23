@@ -19,8 +19,8 @@ class FunctionLibrary{
   }
   static String formatDuration(Duration duration){
     String day = duration.inDays > 0 ? duration.inDays.toString() + 'day, ' : '';
-    String hour = duration.inHours > 0 ? duration.inHours.toString()+ ' hour, ' : '';
-    String minute = duration.inMinutes > 0 ? duration.inMinutes.toString()  + ' min remaining':'';
+    String hour = duration.inHours > 0 ? (duration.inHours - duration.inDays * 24).toString()+ ' hour, ' : '';
+    String minute = duration.inMinutes > 0 ? (duration.inMinutes - duration.inHours * 60).toString()  + ' min remaining':'';
     return day + hour+ minute;
   }
   static void pickTime(BuildContext context, Function onDateChange, onTimeChange) {

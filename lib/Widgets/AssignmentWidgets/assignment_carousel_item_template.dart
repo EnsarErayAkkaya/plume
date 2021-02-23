@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/assignment.dart';
+import 'package:plume/Services/delete_assignment.dart';
 import 'package:plume/Utilities/function_library.dart';
 import 'package:plume/Widgets/Utility/CardButtonTemplate.dart';
 
 class AssignmentCarouselItemTemplate extends StatelessWidget {
   final Assignment assignment;
+  final Function delete;
+  final Function details;
+  final Function edit;
 
-  const AssignmentCarouselItemTemplate({Key key, this.assignment}) : super(key: key);
+  const AssignmentCarouselItemTemplate(
+    {Key key, this.assignment, this.delete, this.details, this.edit}
+  ) : super(key: key);
 
   String assignmentDesc(String desc) {
     return desc.length < 60? desc:desc.substring(0,60) + '...';
@@ -56,9 +63,9 @@ class AssignmentCarouselItemTemplate extends StatelessWidget {
           ),
           AssignmentDates(assignment: assignment),
           CardButtonsTemplate(
-            details: (){},
-            delete: (){},
-            edit: (){},
+            details: details,
+            delete: delete,
+            edit: edit,
           ),
         ],
       ),

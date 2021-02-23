@@ -50,7 +50,7 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
                         icon: Icon(
                           Icons.add_box,
                           color: Theme.of(context).accentColor,
-                          size: 20,
+                          size: 22,
                         ),
                         label: const Text(
                           'Add',
@@ -66,7 +66,10 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
                   )
               ),
               //SizedBox(height: size.height * 0.01,),
-              AssignmentCarouselTemplate(assignments: widget.subject.assignments),
+              AssignmentCarouselTemplate(
+                assignments: widget.subject.assignments,
+                subjectId: widget.subject.id,
+              ),
               SizedBox(height: size.height * 0.01,),
               Padding(
                 padding: EdgeInsets.all(6),

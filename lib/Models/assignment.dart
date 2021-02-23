@@ -6,10 +6,10 @@ class Assignment{
   String title;
   DateTime startDate;
   DateTime endDate;
-  String fileURL;
+  String file;
   List<AssignmentAnswer> assignmentAnswers;
 
-  Assignment({this.id, this.title, this.description, this.startDate, this.endDate, this.fileURL, this.assignmentAnswers});
+  Assignment({this.id, this.title, this.description, this.startDate, this.endDate, this.file, this.assignmentAnswers});
 
   factory Assignment.fromJson(Map json){
 
@@ -17,7 +17,7 @@ class Assignment{
       id: json['_id'],
       title: json['title'],
       description: json['description'],
-      fileURL: json['fileURL'],
+      file: json['file'],
       startDate: DateTime.parse(json['startDate']),
       endDate: DateTime.parse(json['endDate']),
       assignmentAnswers: []

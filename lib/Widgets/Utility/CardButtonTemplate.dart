@@ -22,7 +22,6 @@ class CardButtonsTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    //print(', CardButtonsTemplate Builded');
     return Container(
       height: size.height*0.09,
       decoration: BoxDecoration(
@@ -40,48 +39,48 @@ class CardButtonsTemplate extends StatelessWidget {
                 icon: Icon(
                   Icons.delete,
                   color: Colors.red,
-                  size: 16,
+                  size: 18,
                 ),
                 label: const Text(
                   'Delete',
                   style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.w600,
-                      fontSize: 16
+                      fontSize: 18
                   ),
                 ),
                 onPressed: () => delete(),
               ),
-              const SizedBox(width: 2),
+              SizedBox(width: size.width * 0.06),
               TextButton.icon(
                 icon: Icon(
                   Icons.edit,
                   color: Colors.orange,
-                  size: 16,
+                  size: 18,
                 ),
                 label: const Text(
                   'Edit',
                   style: TextStyle(
                       color: Colors.deepOrange,
                       fontWeight: FontWeight.w600,
-                      fontSize: 16
+                      fontSize: 18
                   ),
                 ),
                 onPressed: edit,
               ),
-              const SizedBox(width: 2),
+              SizedBox(width: size.width * 0.06),
               TextButton.icon(
                 icon: Icon(
                   Icons.more,
                   color: Colors.blue,
-                  size: 16,
+                  size: 18,
                 ),
                 label: Text(
                   'Details',
                   style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.w600,
-                      fontSize: 16
+                      fontSize: 18
                   ),
                 ),
                 onPressed: () => details(),

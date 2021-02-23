@@ -1,13 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/assignment.dart';
+import 'package:plume/Models/subject.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/AssignmentWidgets/assignment_carousel_item_template.dart';
+import 'package:plume/Services/delete_assignment.dart';
 
-class AssignmentCarouselTemplate extends StatelessWidget {
+class AssignmentCarouselTemplate extends StatefulWidget {
   final List<Assignment> assignments;
+  final String subjectId;
 
-  const AssignmentCarouselTemplate({Key key, this.assignments}) : super(key: key);
+  const AssignmentCarouselTemplate({Key key,this.assignments, this.subjectId}) : super(key: key);
 
+  @override
+  _AssignmentCarouselTemplateState createState() => _AssignmentCarouselTemplateState();
+}
+
+class _AssignmentCarouselTemplateState extends State<AssignmentCarouselTemplate> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -20,7 +29,21 @@ class AssignmentCarouselTemplate extends StatelessWidget {
         aspectRatio: 2.0,
         initialPage: 2,
       ),
-      items: assignments.map((e) => AssignmentCarouselItemTemplate(assignment: e,)).toList(),
+      items: widget.assignments.map((e) => AssignmentCarouselItemTemplate(
+        assignment: e,
+        delete: () async{
+          DeleteAssignment _deleteAssignment = DeleteAssignment(e.id, TeacherData.teacher.id, widget.subjectId);
+          Map deleteResponse = await _deleteAssignment.sendDeleteAssignment();
+          if(deleteResponse['success'] == true){
+            Subject s = TeacherData.teacher.subjects.firstWhere((s) => s.id == widget.subjectId);
+            s.assignments.remove(e);
+            print('Assignment ' + e.title + ' deleted');
+            setState(() {});
+          }else{
+            print('Couldnt delete assignment: ' + deleteResponse['error']);
+          }
+        },
+      )).toList(),
     );
   }
 }
