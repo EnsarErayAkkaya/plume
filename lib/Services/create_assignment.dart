@@ -18,6 +18,7 @@ class CreateAssignment extends ServiceBase{
 
   Future<Map> sendCreateAssignmentRequest () async {
     try {
+      print('subject:' +subject);
       Map<String, String> body =
       {
         'title': title, 'description': desc,'startDate': startDate.toString(), 'endDate': endDate.toString(), 'subject': subject

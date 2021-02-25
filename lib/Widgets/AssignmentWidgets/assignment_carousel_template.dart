@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/assignment.dart';
 import 'package:plume/Models/subject.dart';
+import 'package:plume/Pages/TeachaerPages/assignment_detail_page.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/AssignmentWidgets/assignment_carousel_item_template.dart';
 import 'package:plume/Services/delete_assignment.dart';
 
 class AssignmentCarouselTemplate extends StatefulWidget {
   final List<Assignment> assignments;
   final String subjectId;
+  final Function edit;
 
-  const AssignmentCarouselTemplate({Key key,this.assignments, this.subjectId}) : super(key: key);
+  const AssignmentCarouselTemplate({Key key,this.assignments, this.subjectId, this.edit}) : super(key: key);
 
   @override
   _AssignmentCarouselTemplateState createState() => _AssignmentCarouselTemplateState();
@@ -42,6 +44,20 @@ class _AssignmentCarouselTemplateState extends State<AssignmentCarouselTemplate>
           }else{
             print('Couldnt delete assignment: ' + deleteResponse['error']);
           }
+        },
+        edit: () => widget.edit(
+          widget.subjectId,
+          e
+        ),
+        details: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context){
+                  return AssignmentDetailPage(assignment: e,);
+                }
+            ),
+          );
         },
       )).toList(),
     );

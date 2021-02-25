@@ -2,8 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
+import 'package:plume/Models/assignment.dart';
 import 'package:plume/Models/subject.dart';
 import 'package:plume/Widgets/AssignmentWidgets/assignment_create_widget.dart';
+import 'package:plume/Widgets/AssignmentWidgets/assignment_edit_widget.dart';
 import 'package:plume/Widgets/StudentWidgets/add_student_widget.dart';
 import 'package:plume/Widgets/SubjectWidgets/subject_detail_body.dart';
 import 'package:plume/Widgets/Utility/floating_button_template.dart';
@@ -51,20 +53,37 @@ class _SubjectDetailPageState extends State<SubjectDetailPage> {
     }
   }
   Widget setSubjectDetailBody(){
-    return SubjectDetailBody(subject: widget.subject, addAssignment: (){
-      setState(() {
-        createAssignment = true;
-        bodyWidget = AssignmentCreateWidget(
-          subject: widget.subject,
-          back: (){
-            setState(() {
-              createAssignment = false;
-              bodyWidget = setSubjectDetailBody();
-            });
-          },
-        );
-      });
-    },
+    return SubjectDetailBody(
+      subject: widget.subject,
+      addAssignment: (){
+        setState(() {
+          createAssignment = true;
+            bodyWidget = AssignmentCreateWidget(
+              subject: widget.subject,
+              back: (){
+                setState(() {
+                  createAssignment = false;
+                  bodyWidget = setSubjectDetailBody();
+                });
+              },
+            );
+          });
+      },
+      editAssignment: (String subjectId, Assignment assignment){
+        setState(() {
+          createAssignment = true;
+          bodyWidget = AssignmentEditWidget(
+            subject: subjectId,
+            assignment: assignment,
+            back: () {
+              setState(() {
+                createAssignment = false;
+                bodyWidget = setSubjectDetailBody();
+              });
+            },
+          );
+        });
+      },
     );
   }
 

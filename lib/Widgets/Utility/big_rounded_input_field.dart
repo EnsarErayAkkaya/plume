@@ -22,6 +22,7 @@ class BigRoundedInputField extends StatelessWidget {
             color: Colors.white,
           ),
           hintText: hintText,
+          hintMaxLines: 6,
           border: InputBorder.none,
         ),
         style:TextStyle(

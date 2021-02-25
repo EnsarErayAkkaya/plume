@@ -18,15 +18,40 @@ Future<Map> postRequest(String url, dynamic body) async {
 }
 Future<Map> postMultipartRequest(String url, String filename, Map<String, String> json) async {
   printURL(url);
+  printURL(json.toString());
   var request = MultipartRequest('POST', Uri.parse(url));
+  if(filename != null && filename != '') {
+    request.files.add(
+        MultipartFile.fromBytes(
+            'file',
+            File(filename).readAsBytesSync(),
+            filename: filename
+                .split("/")
+                .last
+        )
+    );
+  }
+  request.fields.addAll(json);
 
-  request.files.add(
-      MultipartFile.fromBytes(
-          'file',
-          File(filename).readAsBytesSync(),
-          filename: filename.split("/").last
-      )
-  );
+  StreamedResponse response = await request.send();
+
+  return mapData(await response.stream.bytesToString());
+}
+Future<Map> putMultipartRequest(String url, String filename, Map<String, String> json) async {
+  printURL(url);
+  printURL(json.toString());
+  var request = MultipartRequest('PUT', Uri.parse(url));
+  if(filename != null && filename != '') {
+    request.files.add(
+        MultipartFile.fromBytes(
+            'file',
+            File(filename).readAsBytesSync(),
+            filename: filename
+                .split("/")
+                .last
+        )
+    );
+  }
   request.fields.addAll(json);
 
   StreamedResponse response = await request.send();

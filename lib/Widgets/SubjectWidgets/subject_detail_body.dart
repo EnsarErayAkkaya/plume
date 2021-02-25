@@ -8,11 +8,12 @@ import 'file:///C:/Eray/Flutter/plume/lib/Widgets/AssignmentWidgets/assignment_c
 
 class SubjectDetailBody extends StatefulWidget {
   const SubjectDetailBody({
-    Key key, this.subject, this.addAssignment,
+    Key key, this.subject, this.addAssignment, this.editAssignment,
   }) : super(key: key);
 
   final Subject subject;
   final Function addAssignment;
+  final Function editAssignment;
   @override
   _SubjectDetailBodyState createState() => _SubjectDetailBodyState();
 }
@@ -69,6 +70,7 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
               AssignmentCarouselTemplate(
                 assignments: widget.subject.assignments,
                 subjectId: widget.subject.id,
+                edit: widget.editAssignment,
               ),
               SizedBox(height: size.height * 0.01,),
               Padding(

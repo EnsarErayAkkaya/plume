@@ -39,51 +39,51 @@ class CardButtonsTemplate extends StatelessWidget {
                 icon: Icon(
                   Icons.delete,
                   color: Colors.red,
-                  size: 18,
+                  size: 16,
                 ),
                 label: const Text(
                   'Delete',
                   style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.w600,
-                      fontSize: 18
+                      fontSize: 16
                   ),
                 ),
                 onPressed: () => delete(),
               ),
-              SizedBox(width: size.width * 0.06),
+              SizedBox(width: size.width * 0.01),
               TextButton.icon(
                 icon: Icon(
                   Icons.edit,
                   color: Colors.orange,
-                  size: 18,
+                  size: 16,
                 ),
                 label: const Text(
                   'Edit',
                   style: TextStyle(
                       color: Colors.deepOrange,
                       fontWeight: FontWeight.w600,
-                      fontSize: 18
+                      fontSize: 16
                   ),
                 ),
                 onPressed: edit,
               ),
-              SizedBox(width: size.width * 0.06),
+              SizedBox(width: size.width * 0.01),
               TextButton.icon(
                 icon: Icon(
                   Icons.more,
                   color: Colors.blue,
-                  size: 18,
+                  size: 16,
                 ),
                 label: Text(
                   'Details',
                   style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.w600,
-                      fontSize: 18
+                      fontSize: 16
                   ),
                 ),
-                onPressed: () => details(),
+                onPressed: details,
               ),
               const SizedBox(width: 0),
             ],

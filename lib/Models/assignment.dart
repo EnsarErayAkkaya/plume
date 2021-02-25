@@ -23,4 +23,13 @@ class Assignment{
       assignmentAnswers: []
     );
   }
+  void set(Assignment a){
+    this.id = a.id;
+    this.description = a.description;
+    this.title = a.title;
+    this.startDate = a.startDate;
+    this.endDate = a.endDate;
+    this.file = a.file;
+    assignmentAnswers = assignmentAnswers;
+  }
 }

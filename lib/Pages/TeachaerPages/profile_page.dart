@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage>
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: size.height * 0.6,),
+          SizedBox(height: size.height * 0.5,),
           //Divider
           /*Padding(
             padding: EdgeInsets.symmetric(horizontal: 15),
