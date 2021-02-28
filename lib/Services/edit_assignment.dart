@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:plume/Services/service_base.dart';
+import 'package:plume/Utilities/function_library.dart';
 
 class EditAssignment extends ServiceBase{
   String url;
@@ -23,8 +24,13 @@ class EditAssignment extends ServiceBase{
       Map<String, String> body =  {};
       title != null && title != ''? body['title'] = title:null;
       desc != null && desc != ''? body['description'] = desc:null;
-      startDate != null && startDate.toString() != ''? body['startDate'] = startDate.toString():null;
-      endDate != null && endDate.toString() != ''? body['endDate'] = endDate.toString():null;
+
+      startDate != null && startDate.toString() != ''?
+        body['startDate'] = FunctionLibrary.formatDateForServer(startDate).toString():null;
+
+      endDate != null && endDate.toString() != ''?
+        body['endDate'] = FunctionLibrary.formatDateForServer(endDate).toString():null;
+
       subject != null && subject != ''? body['subject'] = subject:null;
 
       Map response = await putMultipartRequest(url, filename, body);

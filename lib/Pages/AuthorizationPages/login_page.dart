@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Pages/AuthorizationPages/sign_up_page.dart';
-import 'file:///C:/Eray/Flutter/plume/lib/Pages/TeachaerPages/teacher_dashboard_page.dart';
+import 'file:///C:/Eray/Flutter/plume/lib/Pages/TeacherPages/teacher_dashboard_page.dart';
 import 'package:plume/Services/login.dart';
 import 'package:plume/Widgets/Utility/rounded_button.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/rounded_input_field.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/rounded_password_field.dart';
-import 'package:plume/Widgets/already_have_an_account_check.dart';
+import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/already_have_an_account_check.dart';
 
 class LoginPage extends StatefulWidget {
   final String userRole;

@@ -14,7 +14,7 @@ class BottomNavigationBarTemplate extends StatefulWidget {
 class _State extends State<BottomNavigationBarTemplate> {
   int _selectedIndex = 0;
   List<NavbarItem> _navbarItems = [
-    NavbarItem(icon: Icons.home,text: 'Home'),
+    NavbarItem(icon: Icons.home,text: 'Subjects'),
     NavbarItem(icon: Icons.person_search,text: 'Students'),
     NavbarItem(icon: Icons.person,text: 'Profile'),
   ];

@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/teacher.dart';
-import 'package:plume/Pages/TeachaerPages/profile_page.dart';
-import 'package:plume/Pages/TeachaerPages/students_page.dart';
-import 'package:plume/Pages/TeachaerPages/subjects_page.dart';
+import 'package:plume/Pages/TeacherPages/profile_page.dart';
+import 'package:plume/Pages/TeacherPages/students_page.dart';
+import 'package:plume/Pages/TeacherPages/subjects_page.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/bottom_navigation_bar_template.dart';
 
 // ignore: must_be_immutable

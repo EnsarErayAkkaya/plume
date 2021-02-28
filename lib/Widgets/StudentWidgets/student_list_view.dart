@@ -7,9 +7,11 @@ class StudentsListView extends StatelessWidget {
   final Function onPress;
   final String buttonText;
   final IconData buttonIcon;
+  final Color color;
+  final Color buttonColor;
   const StudentsListView({
     Key key,
-    this.students, this.onPress, this.buttonText, this.buttonIcon
+    this.students, this.onPress, this.buttonText, this.buttonIcon, @required this.color, this.buttonColor = Colors.red
   }) : super(key: key);
 
   @override
@@ -22,6 +24,8 @@ class StudentsListView extends StatelessWidget {
               press: onPress,
               buttonIcon: buttonIcon,
               buttonText: buttonText,
+              color: color,
+              buttonColor: buttonColor,
         ),
       ).toList(),
     );

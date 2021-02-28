@@ -8,7 +8,8 @@ class StudentIDListView extends StatelessWidget {
   final Function onPress;
   final String buttonText;
   final IconData buttonIcon;
-  StudentIDListView(List<String> studentIDs, this.onPress, this.buttonText, this.buttonIcon){
+  final Color color;
+  StudentIDListView(List<String> studentIDs, this.onPress, this.buttonText, this.buttonIcon, this.color){
     students = studentIDs.map(
             (e) => TeacherData.teacher.students.firstWhere((element) => element.id == e)
     ).toList();
@@ -19,7 +20,8 @@ class StudentIDListView extends StatelessWidget {
       students: students,
       onPress: onPress,
       buttonIcon: buttonIcon,
-      buttonText: buttonText
+      buttonText: buttonText,
+      color: color,
     );
   }
 }

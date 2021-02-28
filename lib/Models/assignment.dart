@@ -1,4 +1,5 @@
 import 'package:plume/Models/assignment_answer.dart';
+import 'package:plume/Utilities/function_library.dart';
 
 class Assignment{
   String id;
@@ -18,8 +19,8 @@ class Assignment{
       title: json['title'],
       description: json['description'],
       file: json['file'],
-      startDate: DateTime.parse(json['startDate']),
-      endDate: DateTime.parse(json['endDate']),
+      startDate: FunctionLibrary.formatDateForClient(DateTime.parse(json['startDate'])),
+      endDate: FunctionLibrary.formatDateForClient(DateTime.parse(json['endDate'])),
       assignmentAnswers: []
     );
   }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:plume/Services/service_base.dart';
+import 'package:plume/Utilities/function_library.dart';
 
 class CreateAssignment extends ServiceBase{
   String url;
@@ -21,7 +22,11 @@ class CreateAssignment extends ServiceBase{
       print('subject:' +subject);
       Map<String, String> body =
       {
-        'title': title, 'description': desc,'startDate': startDate.toString(), 'endDate': endDate.toString(), 'subject': subject
+        'title': title,
+        'description': desc,
+        'startDate': FunctionLibrary.formatDateForServer(startDate).toString(),
+        'endDate': FunctionLibrary.formatDateForServer(endDate).toString(),
+        'subject': subject
       };
 
       Map response = await postMultipartRequest(url, filename, body);

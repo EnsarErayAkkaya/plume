@@ -62,6 +62,7 @@ class AddStudentWidget extends StatelessWidget {
               },
               'Add Student',
               Icons.person_add_alt_1,
+              Theme.of(context).accentColor,
             )
         )
       ],

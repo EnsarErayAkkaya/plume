@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Pages/AuthorizationPages/choose_role_page.dart';
-import 'package:plume/Pages/TeachaerPages/teacher_dashboard_page.dart';
 
 void main() {
   runApp(MaterialApp(

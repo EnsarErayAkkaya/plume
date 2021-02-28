@@ -6,8 +6,10 @@ class StudentCardTemplate extends StatelessWidget {
   final Function press;
   final String buttonText;
   final IconData buttonIcon;
+  final Color color;
+  final Color buttonColor;
   const StudentCardTemplate({
-    Key key, this.student, this.press, this.buttonText, this.buttonIcon,
+    Key key, this.student, this.press, this.buttonText, this.buttonIcon, @required this.color, this.buttonColor = Colors.red,
   }) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class StudentCardTemplate extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        color: Theme.of(context).accentColor,
+        color: color,
         child: Column(
             children: [
               ListTile(
@@ -43,8 +45,8 @@ class StudentCardTemplate extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(
-                  color: Theme.of(context).accentColor,
-                  width: 8,
+                    color: color,
+                    width: 8,
                   ),
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -54,13 +56,13 @@ class StudentCardTemplate extends StatelessWidget {
                     TextButton.icon(
                       icon: Icon(
                         buttonIcon,
-                        color: Colors.red,
+                        color: buttonColor,
                         size: 35,
                       ),
                       label: Text(
                         buttonText,
                         style: TextStyle(
-                            color: Colors.red,
+                            color: buttonColor,
                             fontWeight: FontWeight.w600,
                             fontSize: 18
                         ),

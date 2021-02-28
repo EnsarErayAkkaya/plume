@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/assignment.dart';
 import 'package:plume/Models/subject.dart';
-import 'package:plume/Pages/TeachaerPages/assignment_detail_page.dart';
+import 'package:plume/Pages/TeacherPages/assignment_detail_page.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/AssignmentWidgets/assignment_carousel_item_template.dart';
 import 'package:plume/Services/delete_assignment.dart';
 

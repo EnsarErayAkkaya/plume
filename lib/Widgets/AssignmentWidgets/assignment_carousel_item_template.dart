@@ -3,6 +3,7 @@ import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/assignment.dart';
 import 'package:plume/Services/delete_assignment.dart';
 import 'package:plume/Utilities/function_library.dart';
+import 'package:plume/Widgets/AssignmentWidgets/assignment_dates.dart';
 import 'package:plume/Widgets/Utility/CardButtonTemplate.dart';
 
 class AssignmentCarouselItemTemplate extends StatelessWidget {
@@ -21,6 +22,7 @@ class AssignmentCarouselItemTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //print('end Date is:' + assignment.endDate.toString());
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width ,
@@ -73,43 +75,4 @@ class AssignmentCarouselItemTemplate extends StatelessWidget {
   }
 }
 
-class AssignmentDates extends StatelessWidget {
-  const AssignmentDates({
-    Key key,
-    @required this.assignment,
-  }) : super(key: key);
 
-  final Assignment assignment;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-            'Started at: ' + FunctionLibrary.formatDateTime(assignment.startDate),
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.white
-            )
-        ),
-        Text(
-            (assignment.endDate.isBefore(DateTime.now())?'Finished at: ': 'Until :') + FunctionLibrary.formatDateTime(assignment.endDate),
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.white
-            )
-        ),
-        Text(
-            assignment.endDate.isBefore(DateTime.now())?'': FunctionLibrary.formatDuration(assignment.endDate.difference(DateTime.now())),
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.white
-            )
-        ),
-      ],
-    );
-  }
-}

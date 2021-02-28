@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Pages/AuthorizationPages/login_page.dart';
 import 'package:plume/Services/sign_up.dart';
 import 'package:plume/Widgets/Utility/rounded_button.dart';
-import 'package:plume/Widgets/already_have_an_account_check.dart';
+import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/already_have_an_account_check.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/rounded_input_field.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/rounded_password_field.dart';
 

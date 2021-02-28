@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
-import 'package:plume/Pages/TeachaerPages/subject_detail_page.dart';
+import 'package:plume/Pages/TeacherPages/subject_detail_page.dart';
 import 'package:plume/Services/delete_subject.dart';
 import 'package:plume/Services/update_subject.dart';
 import 'package:plume/Widgets/SubjectWidgets/subject_card_template.dart';

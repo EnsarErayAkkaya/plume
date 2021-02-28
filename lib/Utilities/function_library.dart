@@ -17,10 +17,39 @@ class FunctionLibrary{
     return day +'/' + month +'/'+
         year+', ' +hour +':' +minute;
   }
-  static String formatDuration(Duration duration){
+
+  static DateTime formatDateForServer(DateTime date){
+    print(date);
+    /*DateTime res = date.subtract(
+      Duration(
+        hours: date.timeZoneOffset.inHours,
+        minutes: date.timeZoneOffset.inMinutes - (date.timeZoneOffset.inHours * 60),
+    ));
+    print(res);*/
+    return date;//res;
+  }
+  static DateTime formatDateForClient(DateTime date){
+    print(date);
+    print(DateTime.now().timeZoneName+": " +  DateTime.now().timeZoneOffset.toString());
+    DateTime temp = date.add(
+        Duration(
+          hours: DateTime.now().timeZoneOffset.inHours,
+          minutes: DateTime.now().timeZoneOffset.inMinutes - (DateTime.now().timeZoneOffset.inHours * 60),
+        ));
+
+    DateTime res = DateTime(temp.year, temp.month, temp.day,temp.hour, temp.minute, temp.second);
+    print(res);
+    return res;
+  }
+
+  static String formatDuration(DateTime endDate){
+    Duration duration = endDate.difference(DateTime.now());
+    print('now :' + DateTime.now().toString());
+    print('endDate :' + endDate.toString());
+    print('timezone: ' + endDate.timeZoneOffset.toString());
     String day = duration.inDays > 0 ? duration.inDays.toString() + 'day, ' : '';
-    String hour = duration.inHours > 0 ? (duration.inHours - duration.inDays * 24).toString()+ ' hour, ' : '';
-    String minute = duration.inMinutes > 0 ? (duration.inMinutes - duration.inHours * 60).toString()  + ' min remaining':'';
+    String hour = duration.inHours > 0 ? (duration.inHours - duration.inDays * 24 ).toString()+ ' hour, ' : '';
+    String minute = duration.inMinutes > 0 ? (duration.inMinutes - duration.inHours * 60 ).toString()  + ' min remaining':'';
     return day + hour+ minute;
   }
   static void pickTime(BuildContext context, Function onDateChange, onTimeChange) {
@@ -38,18 +67,20 @@ class FunctionLibrary{
         ),
         onChanged: (date) {
           onDateChange(date);
-          print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
+          //print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
         },
         onConfirm: (date) {
           print('confirm $date');
           DatePicker.showTimePicker(context, showTitleActions: true,
-          onChanged: (date)
+          onChanged: (time)
           {
-            onTimeChange(date);
-            print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
+            time = date.add(Duration(hours: time.hour, minutes: time.minute, seconds: time.second));
+            onTimeChange(time);
+            //print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
           },
-          onConfirm: (date) {
-            print('confirm $date');
+          onConfirm: (time) {
+            time = date.add(Duration(hours: time.hour, minutes: time.minute, seconds: time.second));
+            print('confirmed date : $time');
           }, currentTime: DateTime.now());
         },
         currentTime: DateTime.now(), locale: LocaleType.en);

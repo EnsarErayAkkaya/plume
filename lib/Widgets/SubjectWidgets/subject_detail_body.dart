@@ -103,29 +103,30 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
                 children: widget.subject.students.map(
                         (e) => TeacherData.teacher.students.firstWhere((element) => element.id == e)).toList().map(
                       (e) => StudentCardTemplate(
-                    student: e,
-                    press: (String studentId) async {
-                      RemoveStudent removeStudent = RemoveStudent(
-                          TeacherData.teacher.id,
-                          widget.subject.id,
-                          studentId
-                      );
-                      Map removeResponse = await removeStudent.sendAddStudentRequest();
-                      if(removeResponse['success'] == true){
-                        print('removed');
-                        //remove student
-                        setState(() {
-                          TeacherData.teacher.subjects.firstWhere(
-                                  (s) => s.id == widget.subject.id
-                          ).students.removeWhere((s) => s == studentId);
-                        });
-                      }
-                      else{
-                        print('error');
-                      }
-                    },
-                    buttonIcon: Icons.person_remove,
-                    buttonText: 'Remove Student',
+                        student: e,
+                        press: (String studentId) async {
+                          RemoveStudent removeStudent = RemoveStudent(
+                              TeacherData.teacher.id,
+                              widget.subject.id,
+                              studentId,
+                          );
+                          Map removeResponse = await removeStudent.sendAddStudentRequest();
+                          if(removeResponse['success'] == true){
+                            print('removed');
+                            //remove student
+                            setState(() {
+                              TeacherData.teacher.subjects.firstWhere(
+                                      (s) => s.id == widget.subject.id
+                              ).students.removeWhere((s) => s == studentId);
+                            });
+                          }
+                          else{
+                            print('error');
+                          }
+                        },
+                        buttonIcon: Icons.person_remove,
+                        buttonText: 'Remove Student',
+                        color: Theme.of(context).accentColor,
                   ),
                 ).toList(),
               )
