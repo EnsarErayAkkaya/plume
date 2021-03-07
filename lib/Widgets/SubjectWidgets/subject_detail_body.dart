@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/subject.dart';
 import 'package:plume/Services/remove_student.dart';
-import 'package:plume/Widgets/AssignmentWidgets/assignment_create_widget.dart';
 import 'package:plume/Widgets/StudentWidgets/student_card_template.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/AssignmentWidgets/assignment_carousel_template.dart';
 
@@ -106,9 +105,9 @@ class _SubjectDetailBodyState extends State<SubjectDetailBody> {
                         student: e,
                         press: (String studentId) async {
                           RemoveStudent removeStudent = RemoveStudent(
-                              TeacherData.teacher.id,
-                              widget.subject.id,
-                              studentId,
+                            TeacherData.teacher.id,
+                            widget.subject.id,
+                            studentId,
                           );
                           Map removeResponse = await removeStudent.sendAddStudentRequest();
                           if(removeResponse['success'] == true){

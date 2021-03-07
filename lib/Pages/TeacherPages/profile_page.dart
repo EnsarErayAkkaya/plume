@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/teacher.dart';
+import 'package:plume/Pages/AuthorizationPages/choose_role_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -18,16 +20,27 @@ class _ProfilePageState extends State<ProfilePage>
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: size.height * 0.5,),
-          //Divider
-          /*Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Divider(
-                height: 15,
-                thickness: 3,
-                color: Theme.of(context).primaryColor
+          SizedBox(height: size.height * 0.01,),
+          SafeArea(
+            child: CircleButton(
+              press: () async{
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('login', false);
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context){
+                        return ChooseRolePage();
+                      }
+                  ),
+                );
+              },
+              icon: Icons.logout,
+              color: Theme.of(context).accentColor,
             ),
-          ),*/
+          ),
+          SizedBox(height: size.height * 0.4,),
           //name surname
           Padding(
             padding: EdgeInsets.all(20),
@@ -115,4 +128,43 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+}
+
+class CircleButton extends StatelessWidget {
+  final Function press;
+  final IconData icon;
+  final Color color;
+
+  const CircleButton({Key key, this.press, this.icon, this.color}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return GestureDetector(
+      onTap: press,
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              color: color,//Theme.of(context).accentColor,
+              borderRadius: BorderRadius.circular(30)
+            ),
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ],
+            )
+          ),
+          SizedBox(width: size.width * 0.01,),
+        ],
+      )
+    );
+  }
 }

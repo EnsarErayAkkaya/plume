@@ -13,7 +13,7 @@ Future<Map> postRequest(String url, dynamic body) async {
     body: body,
     headers: {"Content-Type": "application/json"},
   );
-
+  print(response.body);
   return mapData(response.body);
 }
 Future<Map> postMultipartRequest(String url, String filename, Map<String, String> json) async {

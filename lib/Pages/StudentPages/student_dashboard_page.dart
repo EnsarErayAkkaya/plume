@@ -1,29 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plume/Data/teacher_data.dart';
-import 'package:plume/Models/teacher.dart';
-import 'package:plume/Pages/TeacherPages/profile_page.dart';
-import 'package:plume/Pages/TeacherPages/students_page.dart';
-import 'package:plume/Pages/TeacherPages/subjects_page.dart';
-import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/bottom_navigation_bar_template.dart';
+import 'package:plume/Data/student_data.dart';
+import 'package:plume/Models/student.dart';
+import 'package:plume/Pages/StudentPages/connections_page.dart';
+import 'package:plume/Pages/StudentPages/profile_page.dart';
+import 'package:plume/Pages/StudentPages/subjects_page.dart';
+import 'package:plume/Widgets/Utility/bottom_navigation_bar_template.dart';
 
 // ignore: must_be_immutable
-class TeacherDashboardPage extends StatefulWidget {
+class StudentDashboardPage extends StatefulWidget {
   List<Widget> _pages;
-  TeacherDashboardPage(Map userData) {
-    TeacherData.teacher = Teacher.fromJson(userData);
+  StudentDashboardPage(Map userData) {
+    StudentData.student = Student.fromJson(userData);
     _pages = [
       SubjectsPage(),
-      StudentsPage(),
+      ConnectionsPage(),
       ProfilePage()
     ];
   }
 
   @override
-  _TeacherDashboardPageState createState() => _TeacherDashboardPageState();
+  _StudentDashboardPageState createState() => _StudentDashboardPageState();
 }
 
-class _TeacherDashboardPageState extends State<TeacherDashboardPage> {
+class _StudentDashboardPageState extends State<StudentDashboardPage> {
   PageController _pageController = PageController();
 
   void _onPageChanged(int index){
@@ -41,7 +41,7 @@ class _TeacherDashboardPageState extends State<TeacherDashboardPage> {
       ),
       bottomNavigationBar: BottomNavigationBarTemplate(
         home: 'Subjects',
-        connections: 'Students',
+        connections: 'Connections',
         profile: 'Profile',
         press: (int index,){
           _pageController.jumpToPage(index);

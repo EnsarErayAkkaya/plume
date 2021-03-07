@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:plume/Data/teacher_data.dart';
 import 'package:plume/Models/student.dart';
+import 'package:plume/Services/create_connection.dart';
+import 'package:plume/Services/delete_connection.dart';
+import 'package:plume/Services/remove_student.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/Utility/search_bar_template.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Widgets/StudentWidgets/student_list_view.dart';
 import 'package:plume/Services/search_students.dart';
@@ -34,10 +37,20 @@ class _StudentsPageState extends State<StudentsPage>
       List<Student> students = studentIterable.map((i) =>
           Student.fromJsonSimple(i)).toList();
 
+      students.removeWhere((s) => TeacherData.teacher.students.any((element) => element.id == s.id));
+
       setState(() {
         searchResult = StudentsListView(
           students: students,
-          onPress: (){},
+          onPress: (String studentId) async{
+            CreateConnection _createConnection = CreateConnection(student: studentId, teacher: TeacherData.teacher.id);
+            Map _connectionResponse = await _createConnection.sendCreateConnectionRequest();
+            if(_connectionResponse['success'] == true){
+              print('connection request send');
+            }else{
+              print('connection request error:' + _connectionResponse['error']);
+            }
+          },
           buttonIcon: Icons.add,
           buttonText: 'Create Connection',
           color: Colors.green,
@@ -63,6 +76,36 @@ class _StudentsPageState extends State<StudentsPage>
       'Wait for Dear Students...',
     ),
   );
+  void removeDeletedStudent(String studentId, String subjectId) async{
+    RemoveStudent _removeStudent = RemoveStudent(TeacherData.teacher.id,subjectId,studentId,);
+    Map removeResponse = await _removeStudent.sendAddStudentRequest();
+    if(removeResponse['success'] == true){
+      print('removed');
+      //remove student
+      TeacherData.teacher.subjects.firstWhere(
+              (s) => s.id == subjectId
+      ).students.removeWhere((s) => s == studentId);
+    }
+    else{
+      print('error');
+    }
+  }
+  void deleteConnection (String studentId) async{
+    DeleteConnection _deleteConnection = DeleteConnection(studentId, TeacherData.teacher.id);
+    Map _deleteResponse = await _deleteConnection.sendDeleteConnectionRequest();
+    if(_deleteResponse['success'] == true){
+      print('student connection deleted');
+      setState((){
+        var subjects = TeacherData.teacher.subjects.where((s) => s.students.any((e) => e == studentId)).toList();
+        for(int i = 0; i < subjects.length; i++){
+          removeDeletedStudent(studentId, subjects[i].id);
+        }
+        TeacherData.teacher.students.removeWhere((s) => s.id == studentId);
+      });
+    }else{
+      print('Delete connection error: ' + _deleteResponse['error']);
+    }
+  }
 
   void setBodyItem(String value, List<Student> s, BuildContext context) async {
     searchText = value;
@@ -72,9 +115,7 @@ class _StudentsPageState extends State<StudentsPage>
     setState(() {
       bodyItem = searchText == ''? StudentsListView(
         students: s,
-        onPress: (String studentId){
-
-        },
+        onPress: deleteConnection,
         buttonIcon: Icons.cancel,
         buttonText: 'Delete Connection',
         color: Theme.of(context).accentColor,
@@ -100,7 +141,7 @@ class _StudentsPageState extends State<StudentsPage>
             Expanded(
               child:bodyItem == null? StudentsListView(
                 students: widget.students,
-                onPress: (){},
+                onPress: deleteConnection,
                 buttonIcon: Icons.cancel,
                 buttonText: 'Delete Connection',
                 color: Theme.of(context).accentColor,
