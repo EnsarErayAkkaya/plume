@@ -18,14 +18,20 @@ class _SearchBarTemplateState extends State<SearchBarTemplate> {
         child: Container(
           width: size.width,
           child: TextField(
+            cursorColor: Colors.white,
             onChanged: widget.setBodyItem,
             decoration: InputDecoration(
-                labelText: "Search",
-                hintText: "Search",
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25.0))
-                )
+              focusColor: Colors.white,
+              fillColor: Colors.white,
+              labelText: "Search",
+              hintText: "Search",
+              prefixIcon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(25.0))
+              )
             ),
           ),
         )

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:plume/Pages/StudentPages/student_dashboard_page.dart';
 import 'package:plume/Pages/TeacherPages/teacher_dashboard_page.dart';
 import 'package:plume/Services/login.dart';
 import 'package:plume/Widgets/Utility/rounded_button.dart';
@@ -33,15 +34,30 @@ class ChooseRolePage extends StatelessWidget {
     }
   })();
   void _onLogin(BuildContext context, Map response) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String _userRole = prefs.getString('role');
     await Future<void>.delayed(Duration(seconds: 1));
-    await Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-          builder: (context){
-            return TeacherDashboardPage(response['data']);
-          }
-      ),
-    );
+    if(_userRole == 'teacher'){
+      await Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context){
+              return TeacherDashboardPage(response['data']);
+            }
+        ),
+      );
+    }
+    else{
+      await Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context){
+              return StudentDashboardPage(response['data']);
+            }
+        ),
+      );
+    }
+
   }
 
   @override

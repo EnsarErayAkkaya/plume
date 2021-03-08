@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plume/Pages/StudentPages/student_dashboard_page.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Pages/AuthorizationPages/sign_up_page.dart';
 import 'file:///C:/Eray/Flutter/plume/lib/Pages/TeacherPages/teacher_dashboard_page.dart';
 import 'package:plume/Services/login.dart';
@@ -95,15 +96,25 @@ class _LoginPageState extends State<LoginPage> {
                         setState(() {
                           errorText = '';
                           waitingResponse = false;
-                          // go to main page
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context){
-                                  return TeacherDashboardPage(loginResponse['data']);
-                                }
-                            ),
-                          );
+                          if(widget.userRole == 'teacher'){
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context){
+                                    return TeacherDashboardPage(loginResponse['data']);// go to main page
+                                  }
+                              ),
+                            );
+                          }else{
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context){
+                                    return StudentDashboardPage(loginResponse['data']);// go to main page
+                                  }
+                              ),
+                            );
+                          }
                         });
                       }
                       else{

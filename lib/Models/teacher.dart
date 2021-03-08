@@ -10,10 +10,10 @@ class Teacher{
   List<Student> students;
 
   Teacher({this.name,this.surname,this.email,this.id, this.subjects, this.students});
+  Teacher.simple({this.name,this.surname,this.email,this.id});
 
   factory Teacher.fromJson(Map json)
   {
-    print('factory:'+json['name']);
     Iterable subjectList = json['subjects'];
 
     List<Subject> subjects = subjectList.map((i) =>
@@ -31,6 +31,14 @@ class Teacher{
       id:json['_id'],
       subjects: subjects,
       students: students
+    );
+  }
+  factory Teacher.fromJsonSimple(Map json){
+    return Teacher.simple(
+        name:json['name'],
+        surname:json['surname'],
+        email:json['email'],
+        id:json['_id']
     );
   }
   void printData()

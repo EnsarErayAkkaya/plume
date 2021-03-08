@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:plume/Pages/AuthorizationPages/choose_role_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -11,7 +12,30 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     super.build(context);
-    return Text('Profile Student');
+    return Column(
+        children:[
+          SafeArea(
+            child: CircleButton(
+              press: () async{
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('login', false);
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context){
+                        return ChooseRolePage();
+                      }
+                  ),
+                );
+              },
+              icon: Icons.logout,
+              color: Theme.of(context).accentColor,
+            ),
+          ),
+          Text('Profile Student')
+        ]
+    );
   }
 
   @override

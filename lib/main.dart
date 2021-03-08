@@ -5,18 +5,6 @@ import 'file:///C:/Eray/Flutter/plume/lib/Pages/AuthorizationPages/choose_role_p
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  /*SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool login = prefs.getBool('login');
-  String userRole;
-  Map loginResponse;
-  if(login) {
-    String email = prefs.getString('email');
-    String password = prefs.getString('pass');
-    userRole = prefs.getString('role');
-
-    Login _login = Login(email, password, userRole);
-    loginResponse = await _login.sendLoginRequest();
-  }*/
 
   runApp(MaterialApp(
     title: 'Plume',
@@ -24,11 +12,10 @@ void main() {
     theme: ThemeData(
       primaryColor: Colors.brown[600],
       accentColor: Colors.blue,
-      scaffoldBackgroundColor: Colors.grey[50]
+      scaffoldBackgroundColor: Colors.amber[100]
     ),
     routes: {
-      '/': (context) => /*((loginResponse != null && loginResponse['success'] == true)?
-        TeacherDashboardPage(loginResponse['data'], userRole):*/ChooseRolePage()
+      '/': (context) => ChooseRolePage()
     },
   ));
 }
